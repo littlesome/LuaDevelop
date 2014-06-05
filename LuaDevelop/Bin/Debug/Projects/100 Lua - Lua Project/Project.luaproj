@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project>
+  <hiddenPaths>
+    <!-- example: <hidden path="..." /> -->
+  </hiddenPaths>
+  <!-- Other project options -->
+  <options>
+    <option showHiddenPaths="False" />
+    <option command="" />
+    <option argument="" />
+    <option workingdir="" />
+    <option symbolpath="" />
+  </options>
+</project>

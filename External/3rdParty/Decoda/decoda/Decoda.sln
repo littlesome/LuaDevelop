@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Frontend", "Frontend.vcxproj", "{D35C81F4-75E1-8249-980A-C42F56870F02}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LuaInject", "LuaInject.vcxproj", "{6BFFCD4C-801D-5742-850D-6C608A5E8DCD}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Shared", "Shared.vcxproj", "{D598CF21-EC7F-9C4A-AD81-3938AF59B364}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Release|Win32 = Release|Win32
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D35C81F4-75E1-8249-980A-C42F56870F02}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D35C81F4-75E1-8249-980A-C42F56870F02}.Debug|Win32.Build.0 = Debug|Win32
+		{D35C81F4-75E1-8249-980A-C42F56870F02}.Release|Win32.ActiveCfg = Release|Win32
+		{D35C81F4-75E1-8249-980A-C42F56870F02}.Release|Win32.Build.0 = Release|Win32
+		{6BFFCD4C-801D-5742-850D-6C608A5E8DCD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{6BFFCD4C-801D-5742-850D-6C608A5E8DCD}.Debug|Win32.Build.0 = Debug|Win32
+		{6BFFCD4C-801D-5742-850D-6C608A5E8DCD}.Release|Win32.ActiveCfg = Release|Win32
+		{6BFFCD4C-801D-5742-850D-6C608A5E8DCD}.Release|Win32.Build.0 = Release|Win32
+		{D598CF21-EC7F-9C4A-AD81-3938AF59B364}.Debug|Win32.ActiveCfg = Debug|Win32
+		{D598CF21-EC7F-9C4A-AD81-3938AF59B364}.Debug|Win32.Build.0 = Debug|Win32
+		{D598CF21-EC7F-9C4A-AD81-3938AF59B364}.Release|Win32.ActiveCfg = Release|Win32
+		{D598CF21-EC7F-9C4A-AD81-3938AF59B364}.Release|Win32.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

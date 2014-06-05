@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Scintilla xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<keyword-classes>
+		<keyword-class name="lua-primary-keywords">
+			and break do else elseif end false for function global if in local nil not or repeat return then true until while
+		</keyword-class>
+		<keyword-class name="lua-additional-keywords">
+			_ALERT _ERRORMESSAGE _PROMPT _VERSION assert collectgarbage create error gcinfo globals loadfile loadstring metatable next nexti pcall print rawget rawset require tonumber tostring type unpack xpcall yield
+			abs acos asin atan atan2 byte ceil char concat cos deg exp find floor foreach foreachi format frexp getn gfind gsub insert ldexp len log log10 lower max min mod pi rad random randomseed rep remove sin sort sqrt sub tan upper
+			clock close date difftime execute exit flush getenv input open output popen read remove rename seek setlocale stdin stderr stdout time tmpfile tmpname write			
+		</keyword-class>
+	</keyword-classes>
+	<languages>
+		<language name="lua">
+			<lexer name="lua" style-bits="7" />
+			<character-class><![CDATA[_qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM0123456789]]></character-class>
+			<line-comment><![CDATA[--]]></line-comment>
+			<comment-start><![CDATA[--[[]]></comment-start>
+			<comment-end><![CDATA[]]]]></comment-end>
+			<file-extensions>lua</file-extensions>
+			<use-keywords>
+				<keyword key="0" class="lua-primary-keywords" />
+				<keyword key="1" class="lua-additional-keywords" />
+			</use-keywords>
+			<!-- COLORING_START -->
+			<editor-style caret-fore="0x000000" caretline-back="0xececec" selection-fore="0xffffff" selection-back="0x3399ff" />
+			<use-styles>
+				<style name="default" fore="0x000000" back="0xffffff" size="9" font="Courier New" />
+				<style name="comment" fore="0x008000" />
+				<style name="commentline" fore="0x008000" />
+				<style name="commentdoc" fore="0x008000" />
+				<style name="number" fore="0x000099" />
+				<style name="word" fore="0x0000EA" />
+				<style name="string" fore="0xa31515" />
+				<style name="character" fore="0xa31515" />
+				<style name="literalstring" fore="0xa31515" />
+				<style name="preprocessor" fore="0x000099" />
+				<style name="operator" fore="0x7A0A77" />
+				<style name="identifier" />
+				<style name="stringeol" />
+				<style name="word2" fore="0x008080" />
+				<style name="gdefault" fore="0xc0c0c0" />
+				<style name="linenumber" fore="0x666666" />
+				<style name="bracelight" fore="0x0000cc" back="0xcdcdff" bold="true" />
+				<style name="bracebad" bold="true" />
+				<style name="controlchar" fore="0xffffff" />
+				<style name="indentguide" fore="0xc0c0c0" />
+				<style name="lastpredefined" fore="0x666666" />
+			</use-styles>
+			<!-- COLORING_END -->
+		</language>
+	</languages>
+</Scintilla>
