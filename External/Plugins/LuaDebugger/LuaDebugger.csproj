@@ -137,11 +137,7 @@
     <Compile Include="Decoda\EventId.cs" />
     <Compile Include="Decoda\IEvtHandler.cs" />
     <Compile Include="Decoda\MessageType.cs" />
-    <Compile Include="Decoda\SWIGTYPE_p_CodeState.cs" />
-    <Compile Include="Decoda\SWIGTYPE_p_EventId.cs" />
     <Compile Include="Decoda\SWIGTYPE_p_LineMapper.cs" />
-    <Compile Include="Decoda\SWIGTYPE_p_MessageType.cs" />
-    <Compile Include="Decoda\SWIGTYPE_p_std__string.cs" />
     <Compile Include="Decoda\SWIGTYPE_p_std__vectorT_DebugFrontend__Process_t.cs" />
     <Compile Include="Helpers\MenusHelper.cs" />
     <Compile Include="Helpers\PanelsHelper.cs" />
