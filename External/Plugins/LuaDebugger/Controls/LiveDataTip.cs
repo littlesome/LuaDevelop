@@ -114,6 +114,9 @@ namespace LuaDebugger
 
             string text = sci.GetLine(line);
 
+            if (seek < 0 || seek >= text.Length)
+                return null;
+
             if (!IsIdentifierChar(characterClass, text[seek]) && text[seek] != '.')
             {
                 return null;

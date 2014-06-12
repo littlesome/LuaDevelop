@@ -544,7 +544,7 @@ namespace LuaDebugger
 
             foreach (BreakPointInfo info in breakPointManager.BreakPoints)
             {
-                if (info.FileFullPath == fullPath && info.Line > 0)
+                if (info.FileFullPath == fullPath && info.Line > 0 && info.IsEnabled && !info.IsDeleted)
                 { 
                     debugger.ToggleBreakpoint(e.GetVm(), scriptIndex, (uint)info.Line);
                 }
@@ -607,7 +607,7 @@ namespace LuaDebugger
 
 			UpdateMenuState(DebuggerState.Stopped);
 
-            NotifyEvent ne = new NotifyEvent(EventType.ProcessStart);
+            NotifyEvent ne = new NotifyEvent(EventType.ProcessEnd);
             EventManager.DispatchEvent(this, ne);
 
 			if (PluginMain.settingObject.SwitchToLayout != null)
