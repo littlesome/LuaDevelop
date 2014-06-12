@@ -2137,7 +2137,7 @@ bool DebugBackend::CallMetaMethod(unsigned long api, lua_State* L, int valueInde
         {
 
             lua_pushstring_dll(api, L, method);
-            lua_gettable_dll(api, L, metaTableIndex);
+            lua_rawget_dll(api, L, metaTableIndex);
 
             if (lua_isnil_dll(api, L, -1))
             {
@@ -3158,6 +3158,7 @@ unsigned int DebugBackend::GetCStack(HANDLE hThread, StackEntry stack[], unsigne
 
         if (SymGetSymFromAddr64_dll(hProcess, stackFrame[i].AddrPC.Offset, NULL, symbol))
         {
+			symbol->Name[s_maxEntryNameLength - 1] = '\0';
             sprintf(stack[i].name, "%s", symbol->Name);
         }
         else
