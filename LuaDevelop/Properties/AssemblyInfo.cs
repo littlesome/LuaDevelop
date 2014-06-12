@@ -9,8 +9,8 @@ using System.Resources;
 // Do not edit AssemblyInfo.cs, it's being autofilled on build from AssemblyInfo.cs.rev!
 //
 [assembly: AssemblyTitle("LuaDevelop")]
-[assembly: AssemblyDescription("LuaDevelop is an open source script editor.")]
-[assembly: AssemblyProduct("")]
+[assembly: AssemblyDescription("LuaDevelop is an open sourced lua IDE.")]
+[assembly: AssemblyProduct("LuaDevelop1.0 (Beta 1)")]
 [assembly: AssemblyCopyright("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyConfiguration("")]

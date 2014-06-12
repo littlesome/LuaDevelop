@@ -156,4 +156,7 @@
 	<menu label="Label.Syntax" name="SyntaxMenu">
 		<!-- GENERATED ON RUNTIME -->
 	</menu>
+	<menu label="Label.Help" name="HelpMenu">
+		<button label="Label.About" click="About" image="229" />
+	</menu>
 </mainmenu>

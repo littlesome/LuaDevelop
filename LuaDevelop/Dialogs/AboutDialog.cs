@@ -12,10 +12,9 @@ using PluginCore;
 namespace LuaDevelop.Dialogs
 {
     public class AboutDialog : Form
-	{
-        private System.Windows.Forms.Label copyLabel;
-        private System.Windows.Forms.Label versionLabel;
-        private System.Windows.Forms.PictureBox imageBox;
+    {
+        private LinkLabel linkLabelGithub;
+        private Label versionLabel;
 
 		public AboutDialog()
 		{
@@ -23,7 +22,6 @@ namespace LuaDevelop.Dialogs
             this.Font = Globals.Settings.DefaultFont;
             this.InitializeComponent();
             this.ApplyLocalizedTexts();
-            this.InitializeGraphics();
 		}
 
 		#region Windows Forms Designer Generated Code
@@ -34,66 +32,46 @@ namespace LuaDevelop.Dialogs
         /// </summary>
 		public void InitializeComponent() 
         {
-            this.imageBox = new System.Windows.Forms.PictureBox();
-            this.copyLabel = new System.Windows.Forms.Label();
             this.versionLabel = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.imageBox)).BeginInit();
+            this.linkLabelGithub = new System.Windows.Forms.LinkLabel();
             this.SuspendLayout();
             // 
-            // imageBox
-            //
-            this.imageBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.imageBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.imageBox.Location = new System.Drawing.Point(0, 0);
-            this.imageBox.Name = "imageBox";
-            this.imageBox.Size = new System.Drawing.Size(450, 244);
-            this.imageBox.TabIndex = 0;
-            this.imageBox.TabStop = false;
-            this.imageBox.Click += new System.EventHandler(this.DialogCloseClick);
-            // 
-            // copyLabel
-            //
-            this.copyLabel.AutoSize = true;
-            this.copyLabel.ForeColor = System.Drawing.Color.DarkGray;
-            this.copyLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.copyLabel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.copyLabel.Location = new System.Drawing.Point(25, 192);
-            this.copyLabel.Name = "copyLabel";
-            this.copyLabel.Size = new System.Drawing.Size(383, 30);
-            this.copyLabel.TabIndex = 0;
-            this.copyLabel.Text = "LuaDevelop logo, domain and the name are copyright of Mika Palmu.\r\nDevelopment: Mika Palmu, Philippe Elsass and all helpful contributors.";
-            this.copyLabel.Click += new System.EventHandler(this.DialogCloseClick);
-            // 
             // versionLabel
-            //
+            // 
             this.versionLabel.AutoSize = true;
-            this.versionLabel.ForeColor = System.Drawing.Color.DarkGray;
-            this.versionLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(37)))), ((int)(((byte)(37)))), ((int)(((byte)(37)))));
-            this.versionLabel.FlatStyle = System.Windows.Forms.FlatStyle.System;
-            this.versionLabel.Location = new System.Drawing.Point(25, 172);
+            this.versionLabel.Location = new System.Drawing.Point(12, 17);
             this.versionLabel.Name = "versionLabel";
-            this.versionLabel.Size = new System.Drawing.Size(289, 15);
+            this.versionLabel.Size = new System.Drawing.Size(89, 12);
             this.versionLabel.TabIndex = 0;
-            this.versionLabel.Text = "LuaDevelop 4.6.0.0 for .NET 2.0 (master#1234567890)";
-            this.versionLabel.Click += new System.EventHandler(this.DialogCloseClick);
+            this.versionLabel.Text = "LuaDevelop 1.0";
+            // 
+            // linkLabelGithub
+            // 
+            this.linkLabelGithub.AutoSize = true;
+            this.linkLabelGithub.Location = new System.Drawing.Point(12, 45);
+            this.linkLabelGithub.Name = "linkLabelGithub";
+            this.linkLabelGithub.Size = new System.Drawing.Size(41, 12);
+            this.linkLabelGithub.TabIndex = 1;
+            this.linkLabelGithub.TabStop = true;
+            this.linkLabelGithub.Text = "GitHub";
+            this.linkLabelGithub.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelGithub_LinkClicked);
             // 
             // AboutDialog
-            //
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(450, 244);
-            this.Controls.Add(this.copyLabel);
+            this.ClientSize = new System.Drawing.Size(368, 74);
+            this.Controls.Add(this.linkLabelGithub);
             this.Controls.Add(this.versionLabel);
-            this.Controls.Add(this.imageBox);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AboutDialog";
             this.ShowInTaskbar = false;
-            this.KeyDown += new KeyEventHandler(this.DialogKeyDown);
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = " About LuaDevelop";
-            ((System.ComponentModel.ISupportInitialize)(this.imageBox)).EndInit();
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DialogKeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -102,15 +80,6 @@ namespace LuaDevelop.Dialogs
 		#endregion
 
 		#region Methods And Event Handlers
-
-        /// <summary>
-        /// Attaches the image to the imagebox
-        /// </summary>
-        private void InitializeGraphics()
-        {
-            Stream stream = ResourceHelper.GetStream("AboutDialog.jpg");
-            this.imageBox.Image = Image.FromStream(stream);
-        }
 
         /// <summary>
         /// Applies the localized texts to the form
@@ -151,6 +120,11 @@ namespace LuaDevelop.Dialogs
         }
 
 		#endregion
+
+        private void linkLabelGithub_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/littlesome/LuaDevelop");
+        }
 
 	}
 	
