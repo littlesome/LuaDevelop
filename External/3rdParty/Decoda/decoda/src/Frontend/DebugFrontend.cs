@@ -145,6 +145,16 @@ public class DebugFrontend : global::System.IDisposable {
       }
     }
   
+    public uint stackLevel {
+      set {
+        DecodaPINVOKE.DebugFrontend_StackFrame_stackLevel_set(swigCPtr, value);
+      } 
+      get {
+        uint ret = DecodaPINVOKE.DebugFrontend_StackFrame_stackLevel_get(swigCPtr);
+        return ret;
+      } 
+    }
+  
     public uint scriptIndex {
       set {
         DecodaPINVOKE.DebugFrontend_StackFrame_scriptIndex_set(swigCPtr, value);

@@ -710,6 +710,28 @@ SWIGEXPORT void SWIGSTDCALL CSharp_delete_DebugFrontend_Script(void * jarg1) {
 }
 
 
+SWIGEXPORT void SWIGSTDCALL CSharp_DebugFrontend_StackFrame_stackLevel_set(void * jarg1, unsigned int jarg2) {
+  DebugFrontend::StackFrame *arg1 = (DebugFrontend::StackFrame *) 0 ;
+  unsigned int arg2 ;
+  
+  arg1 = (DebugFrontend::StackFrame *)jarg1; 
+  arg2 = (unsigned int)jarg2; 
+  if (arg1) (arg1)->stackLevel = arg2;
+}
+
+
+SWIGEXPORT unsigned int SWIGSTDCALL CSharp_DebugFrontend_StackFrame_stackLevel_get(void * jarg1) {
+  unsigned int jresult ;
+  DebugFrontend::StackFrame *arg1 = (DebugFrontend::StackFrame *) 0 ;
+  unsigned int result;
+  
+  arg1 = (DebugFrontend::StackFrame *)jarg1; 
+  result = (unsigned int) ((arg1)->stackLevel);
+  jresult = result; 
+  return jresult;
+}
+
+
 SWIGEXPORT void SWIGSTDCALL CSharp_DebugFrontend_StackFrame_scriptIndex_set(void * jarg1, unsigned int jarg2) {
   DebugFrontend::StackFrame *arg1 = (DebugFrontend::StackFrame *) 0 ;
   unsigned int arg2 ;

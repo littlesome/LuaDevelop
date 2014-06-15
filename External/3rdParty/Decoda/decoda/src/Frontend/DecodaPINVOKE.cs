@@ -273,6 +273,12 @@ class DecodaPINVOKE {
   [global::System.Runtime.InteropServices.DllImport("Decoda", EntryPoint="CSharp_delete_DebugFrontend_Script")]
   public static extern void delete_DebugFrontend_Script(global::System.Runtime.InteropServices.HandleRef jarg1);
 
+  [global::System.Runtime.InteropServices.DllImport("Decoda", EntryPoint="CSharp_DebugFrontend_StackFrame_stackLevel_set")]
+  public static extern void DebugFrontend_StackFrame_stackLevel_set(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
+
+  [global::System.Runtime.InteropServices.DllImport("Decoda", EntryPoint="CSharp_DebugFrontend_StackFrame_stackLevel_get")]
+  public static extern uint DebugFrontend_StackFrame_stackLevel_get(global::System.Runtime.InteropServices.HandleRef jarg1);
+
   [global::System.Runtime.InteropServices.DllImport("Decoda", EntryPoint="CSharp_DebugFrontend_StackFrame_scriptIndex_set")]
   public static extern void DebugFrontend_StackFrame_scriptIndex_set(global::System.Runtime.InteropServices.HandleRef jarg1, uint jarg2);
 

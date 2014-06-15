@@ -408,14 +408,22 @@ namespace LuaDebugger
 
         public Variable EvaluateCurrent(string expression)
         {
-            string str = debugger.Evaluate(m_CurrentVM, expression, (uint)m_CurrentFrame);
+            DebugFrontend.StackFrame frame = debugger.GetStackFrame((uint)m_CurrentFrame);
 
-            if (str.Length > 0)
+            if (frame != null)
             {
-                XmlDocument xml = new XmlDocument();
-                xml.LoadXml(str);
+                if ((int)frame.stackLevel != -1)
+                {
+                    string str = debugger.Evaluate(m_CurrentVM, expression, frame.stackLevel);
 
-                return new Variable(xml.DocumentElement, expression);
+                    if (str.Length > 0)
+                    {
+                        XmlDocument xml = new XmlDocument();
+                        xml.LoadXml(str);
+
+                        return new Variable(xml.DocumentElement, expression);
+                    }
+                }
             }
 
             return null;

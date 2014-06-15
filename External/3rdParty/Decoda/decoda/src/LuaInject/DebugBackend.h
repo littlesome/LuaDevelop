@@ -316,7 +316,7 @@ private:
      * be skipped. This is usful when the current execution point is an error
      * handler we defined.
      */
-    void SendBreakEvent(unsigned long api, lua_State* L, int stackTop = 0);
+    void SendBreakEvent(unsigned long api, lua_State* L);
 
     /**
      * Sends an exception event to the frontend. Break events should be sent
@@ -420,8 +420,8 @@ private:
     {
         char            module[s_maxModuleNameLength];
         char            name[s_maxEntryNameLength];
-        void*           address;
-        unsigned int    scriptIndex;
+		unsigned int    stackLevel;
+		unsigned int    scriptIndex;
         unsigned int    line;
     };
 

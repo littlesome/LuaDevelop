@@ -58,7 +58,8 @@ public:
 
     struct StackFrame
     {
-        unsigned int    scriptIndex;
+		unsigned int    stackLevel;
+		unsigned int    scriptIndex;
         unsigned int    line;
         std::string     function;
     };

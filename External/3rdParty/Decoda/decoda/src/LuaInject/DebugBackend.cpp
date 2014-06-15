@@ -459,7 +459,7 @@ int DebugBackend::PostLoadScript(unsigned long api, int result, lua_State* L, co
             const char* message = lua_tostring_dll(api, L, -1);
 
             // Stop execution.
-            SendBreakEvent(api, L, 1);
+            SendBreakEvent(api, L);
 
             // Send an error event.
             m_eventChannel.WriteUInt32(EventId_LoadError);
@@ -1361,7 +1361,7 @@ void DebugBackend::DeleteAllBreakpoints(){
     SetHaveActiveBreakpoints(false);
 }
 
-void DebugBackend::SendBreakEvent(unsigned long api, lua_State* L, int stackTop)
+void DebugBackend::SendBreakEvent(unsigned long api, lua_State* L)
 {
 
     CriticalSectionLock lock(m_criticalSection);
@@ -1384,23 +1384,12 @@ void DebugBackend::SendBreakEvent(unsigned long api, lua_State* L, int stackTop)
     //   |      | Pre-Lua code (main, etc.)
     //   |      |
     //   +------+
-
     StackEntry nativeStack[100];
     unsigned int nativeStackSize = 0;
 
     if (vm != NULL)
     {
-        // Remember how many stack levels to skip so when we evaluate we can adjust
-        // the stack level accordingly.
-        vm->stackTop = stackTop;
         nativeStackSize = GetCStack(vm->hThread, nativeStack, 100);
-    }
-    else
-    {
-        // For whatever reason we couldn't remember how many stack levels we want to skip,
-        // so don't skip any. This shouldn't happen under any normal circumstance since
-        // the state should have a corresponding VM.
-        stackTop = 0;
     }
 
     m_eventChannel.WriteUInt32(EventId_Break);
@@ -1411,7 +1400,7 @@ void DebugBackend::SendBreakEvent(unsigned long api, lua_State* L, int stackTop)
     lua_Debug scriptStack[s_maxStackSize];
     unsigned int scriptStackSize = 0;
 
-    for (int level = stackTop; scriptStackSize < s_maxStackSize && lua_getstack_dll(api, L, level, &scriptStack[scriptStackSize]); ++level)
+    for (int level = 0; scriptStackSize < s_maxStackSize && lua_getstack_dll(api, L, level, &scriptStack[scriptStackSize]); ++level)
     {
         lua_getinfo_dll(api, L, "nSlu", &scriptStack[scriptStackSize]);
         ++scriptStackSize;
@@ -1426,7 +1415,8 @@ void DebugBackend::SendBreakEvent(unsigned long api, lua_State* L, int stackTop)
     for (unsigned int i = 0; i < stackSize; ++i)
     {
         unsigned int stackIndex = stackSize - i - 1;
-        m_eventChannel.WriteUInt32(stack[stackIndex].scriptIndex);
+		m_eventChannel.WriteUInt32(stack[stackIndex].stackLevel);
+		m_eventChannel.WriteUInt32(stack[stackIndex].scriptIndex);
         m_eventChannel.WriteUInt32(stack[stackIndex].line);
         m_eventChannel.WriteString(stack[stackIndex].name);
     }
@@ -1512,7 +1502,6 @@ int DebugBackend::StaticErrorHandler(lua_State* L)
 
 int DebugBackend::ErrorHandler(unsigned long api, lua_State* L)
 {
-
     int top = lua_gettop_dll(api, L);
 
     // Get the error mesasge.
@@ -1542,7 +1531,7 @@ int DebugBackend::ErrorHandler(unsigned long api, lua_State* L)
         CriticalSectionTryLock lock(m_breakLock);
         if (lock.IsHeld()) 
         {
-            SendBreakEvent(api, L, 1);
+            SendBreakEvent(api, L);
             SendExceptionEvent(L, message);
             WaitForContinue();
         } 
@@ -1949,7 +1938,6 @@ void DebugBackend::SetUpValues(unsigned long api, lua_State* L, int stackLevel, 
 
 bool DebugBackend::Evaluate(unsigned long api, lua_State* L, const std::string& expression, int stackLevel, std::string& result)
 {
-
     if (!GetIsLuaLoaded())
     {
         return false;
@@ -3151,7 +3139,8 @@ unsigned int DebugBackend::GetCStack(HANDLE hThread, StackEntry stack[], unsigne
             stack[i].module[0] = 0;
         }
         
-        stack[i].scriptIndex = -1;
+		stack[i].stackLevel  = -1;
+		stack[i].scriptIndex = -1;
         stack[i].line        = 0;
 
         // Try to get the symbol name from the address.
@@ -3219,7 +3208,7 @@ unsigned int DebugBackend::GetUnifiedStack(unsigned long api, const StackEntry n
         // Walk up the native stack until we hit a transition into Lua.
         while (nativePos >= 0)
         {
-            if (strcmp(nativeStack[nativePos].name, "lua_pcall") == 0)
+			if (strcmp(nativeStack[nativePos].name, "lua_pcall") == 0)
             {
                 --nativePos;
                 break;
@@ -3235,7 +3224,7 @@ unsigned int DebugBackend::GetUnifiedStack(unsigned long api, const StackEntry n
         }
 
         // Walk up the script stack until we hit a transition into C.
-        while (scriptPos >= 0 && stackSize < s_maxStackSize)
+		while (scriptPos >= 0 && stackSize < s_maxStackSize)
         {
             const lua_Debug* ar = &scriptStack[scriptPos];
             const char* function = GetName(api, ar);
@@ -3258,7 +3247,8 @@ unsigned int DebugBackend::GetUnifiedStack(unsigned long api, const StackEntry n
                 break;
             }
 
-            stack[stackSize].scriptIndex = GetScriptIndex(GetSource(api, ar));
+			stack[stackSize].stackLevel  = scriptPos;
+			stack[stackSize].scriptIndex = GetScriptIndex(GetSource(api, ar));
             stack[stackSize].line        = GetCurrentLine(api, ar) - 1;
             
             strncpy(stack[stackSize].name, function, s_maxEntryNameLength);
