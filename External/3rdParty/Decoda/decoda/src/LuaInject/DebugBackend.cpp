@@ -820,9 +820,10 @@ void DebugBackend::HookCallback(unsigned long api, lua_State* L, lua_Debug* ar)
         if (vm->luaJitWorkAround)
         {    
             int stackDepth = GetStackDepth(api, L);
+			int currentLine = GetCurrentLine(api, ar);
 
             //We will get multiple line events for the same line in LuaJIT if there are only calls to C functions on the line 
-            if (vm->lastStepLine == GetCurrentLine(api, ar))
+			if (vm->lastStepLine == currentLine)
             {
                 onLastStepLine = vm->lastStepScript == scriptIndex && vm->callStackDepth != 0 && stackDepth == vm->callStackDepth;
             }
@@ -838,6 +839,9 @@ void DebugBackend::HookCallback(unsigned long api, lua_State* L, lua_Debug* ar)
                     vm->callStackDepth  = 0;
                 }
             }
+
+			vm->lastStepLine = currentLine;
+			vm->lastStepScript = scriptIndex;
         }
 
         if (scriptIndex != -1)
@@ -866,8 +870,6 @@ void DebugBackend::HookCallback(unsigned long api, lua_State* L, lua_Debug* ar)
             if(vm->luaJitWorkAround)
             {
                 vm->callStackDepth = GetStackDepth(api, L);
-                vm->lastStepLine = GetCurrentLine(api, ar);
-                vm->lastStepScript = scriptIndex;
             }
         }
 
@@ -1389,7 +1391,8 @@ void DebugBackend::SendBreakEvent(unsigned long api, lua_State* L)
 
     if (vm != NULL)
     {
-        nativeStackSize = GetCStack(vm->hThread, nativeStack, 100);
+		//do not show native stack
+        //nativeStackSize = GetCStack(vm->hThread, nativeStack, 100);
     }
 
     m_eventChannel.WriteUInt32(EventId_Break);

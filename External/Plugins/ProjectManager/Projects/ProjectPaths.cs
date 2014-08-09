@@ -46,7 +46,7 @@ namespace ProjectManager.Projects
 
 		public static string GetAbsolutePath(string baseDirectory, string path)
 		{
-            if (Path.IsPathRooted(path)) return path;
+            if (Path.IsPathRooted(path)) return Path.GetFullPath(path);
 			string combinedPath = Path.Combine(baseDirectory, path);
 			return Path.GetFullPath(combinedPath);
 		}
